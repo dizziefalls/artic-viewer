@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-export interface UserState {
+export interface FavoritesState {
   favorites: string[]
 }
 
-const initialState: UserState = {
+const initialState: FavoritesState = {
   favorites: []
 }
 
-export const userSlice = createSlice({
-  name: 'user',
+export const favoritesSlice = createSlice({
+  name: 'favorites',
   initialState,
   reducers: {
     addFav: (state, action: PayloadAction<string>) => {
@@ -22,5 +22,5 @@ export const userSlice = createSlice({
   }
 })
 
-export const { addFav, removeFav } = userSlice.actions
-export default userSlice.reducer
+export const { addFav, removeFav } = favoritesSlice.actions
+export default favoritesSlice.reducer

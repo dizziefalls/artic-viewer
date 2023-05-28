@@ -2,6 +2,7 @@ import { useGetAllWorksQuery } from "../../services/artic"
 import imageURLBuilder from "../../helpers/imageURLBuilder"
 
 export default function SearchBrowser() {
+  // Look into args weirdness
   const { data, error, isLoading } = useGetAllWorksQuery(null)
 
   return (
@@ -18,10 +19,10 @@ export default function SearchBrowser() {
           {
             data.data.map((work: any) => {
               return (
-                <>
-                  <h4 key={work.id}>{work.title}</h4>
+                <div key={work.id}>
+                  <h4>{work.title}</h4>
                   <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
-                </>
+                </div>
               )
             })
           }

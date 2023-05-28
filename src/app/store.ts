@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { articApi } from "../services/artic";
-import userReducer from '../features/user/userSlice'
+import favoritesReducer from '../features/Favorites/favoritesSlice'
 
 export const store = configureStore({
   reducer: {
     [articApi.reducerPath]: articApi.reducer,
-    user: userReducer
+    favorites: favoritesReducer
   },
   middleware: (getDefaultMiddleware) => 
      getDefaultMiddleware().concat(articApi.middleware),
