@@ -1,4 +1,5 @@
 import { useGetAllWorksQuery } from "../../services/artic"
+import imageURLBuilder from "../../helpers/imageURLBuilder"
 
 export default function SearchBrowser() {
   const { data, error, isLoading } = useGetAllWorksQuery(null)
@@ -13,10 +14,16 @@ export default function SearchBrowser() {
           <>Loading...</>
         ) : data ? (
           <>
+          {console.log(data.config.iiif_url)}
           {
-            data.data.map((work: any) => 
-            <h4>{work.title}</h4>)
-            //console.log(data)
+            data.data.map((work: any) => {
+              return (
+                <>
+                  <h4 key={work.id}>{work.title}</h4>
+                  <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
+                </>
+              )
+            })
           }
           Loaded!
           </>
