@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type IResponse from '../types/response'
 
-// extend to accept UI generated query params
+// would be nice to build the options separately and always append them...
 // using return types are breaking it currently
 export const articApi = createApi({
   reducerPath: 'articApi',

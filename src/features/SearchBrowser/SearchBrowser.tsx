@@ -2,12 +2,14 @@ import { useGetAllWorksQuery } from "../../services/artic"
 import { Link } from "react-router-dom"
 import imageURLBuilder from "../../helpers/imageURLBuilder"
 import React, { FormEventHandler, useRef } from "react"
-import { useAppSelector } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { setPageSizeLimit } from "../../common/pageConfigSlice"
 
+// Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
   const pageConfig = useAppSelector((state) => state.pageConfig)
+  const dispatch = useAppDispatch()
   
-  // Look into args weirdness
   const { data, error, isLoading } = useGetAllWorksQuery({ 
     options: {
       pageSize: pageConfig.pageNumber,
@@ -18,7 +20,7 @@ export default function SearchBrowser() {
 
   function handleQuery(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log(selectSizeRef.current?.value)
+    dispatch(setPageSizeLimit(selectSizeRef.current?.value!))
   }
 
   return (
@@ -28,7 +30,7 @@ export default function SearchBrowser() {
         <input type="text" placeholder="Search for works at artic..." />
         <button type="submit">Search here!</button>
         <label>Number of Results</label>
-        <select ref={selectSizeRef} defaultValue={25}>
+        <select ref={selectSizeRef} defaultValue={pageConfig.pageSizeLimit}>
           <option value={10}>10</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
