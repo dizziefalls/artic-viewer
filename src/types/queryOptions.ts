@@ -1,5 +1,5 @@
 export default interface IQueryOptions {
-  q: string,
-  pageNumber: string,
-  pageSize: string
+  q: string | null,
+  pageNumber: string | null,
+  pageSize: string | null
 }
