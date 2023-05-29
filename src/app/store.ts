@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { articApi } from "../services/artic";
 import favoritesReducer from '../features/Favorites/favoritesSlice'
+import pageConfigReducer from '../common/pageConfigSlice'
 
 export const store = configureStore({
   reducer: {
     [articApi.reducerPath]: articApi.reducer,
+    pageConfig: pageConfigReducer,
     favorites: favoritesReducer
   },
   middleware: (getDefaultMiddleware) => 

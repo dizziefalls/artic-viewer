@@ -1,4 +1,5 @@
 import { useGetAllWorksQuery } from "../../services/artic"
+import { Link } from "react-router-dom"
 import imageURLBuilder from "../../helpers/imageURLBuilder"
 
 export default function SearchBrowser() {
@@ -15,13 +16,15 @@ export default function SearchBrowser() {
           <>Loading...</>
         ) : data ? (
           <>
-          {console.log(data.config.iiif_url)}
+          {console.log(data)}
           {
             data.data.map((work: any) => {
               return (
-                <div key={work.id}>
+                <div key={work.id} >
                   <h4>{work.title}</h4>
-                  <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
+                  <Link to={`/artwork/${work.id}`}>
+                    <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
+                  </Link>
                 </div>
               )
             })

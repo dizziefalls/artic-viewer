@@ -1,5 +1,6 @@
-export default interface Artwork {
+export default interface IArtwork {
   id: number,
+  imageId: string,
   location: string, //api_link
   title: string, 
   date: string, //date_display
@@ -14,3 +15,12 @@ export default interface Artwork {
   subjectIds: number[], //subject_ids
   subjectTitles: string[], //subject_titles
 }
+
+// auto cast via map
+// const formattedArtwork: IArtwork => response.map(item => {
+//  id: item.id,
+//  location: item.api_link,
+//  ...
+// })
+
+// may still break. to look into.
