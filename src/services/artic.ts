@@ -8,7 +8,7 @@ export const articApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.artic.edu/api/v1/'}),
   endpoints: (builder) => ({
     getAllWorks: builder.query({
-      query: () => 'artworks?page=2&limit=20',
+      query: ({options}) => `artworks?page=${options.pageNumber}&limit=${options.pageSizeLimit}`,
     }),
     getWorkById: builder.query({
       query: (id) => `artworks/${id}`

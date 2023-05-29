@@ -1,14 +1,40 @@
 import { useGetAllWorksQuery } from "../../services/artic"
 import { Link } from "react-router-dom"
 import imageURLBuilder from "../../helpers/imageURLBuilder"
+import React, { FormEventHandler, useRef } from "react"
+import { useAppSelector } from "../../app/hooks"
 
 export default function SearchBrowser() {
+  const pageConfig = useAppSelector((state) => state.pageConfig)
+  
   // Look into args weirdness
-  const { data, error, isLoading } = useGetAllWorksQuery(null)
+  const { data, error, isLoading } = useGetAllWorksQuery({ 
+    options: {
+      pageSize: pageConfig.pageNumber,
+      pageSizeLimit: pageConfig.pageSizeLimit
+    }})
+
+  const selectSizeRef = useRef<HTMLSelectElement>(null)
+
+  function handleQuery(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    console.log(selectSizeRef.current?.value)
+  }
 
   return (
     <>
       <h3>This is where the searches go! </h3>
+      <form onSubmit={(e) => handleQuery(e)}>
+        <input type="text" placeholder="Search for works at artic..." />
+        <button type="submit">Search here!</button>
+        <label>Number of Results</label>
+        <select ref={selectSizeRef} defaultValue={25}>
+          <option value={10}>10</option>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={75}>75</option>
+        </select>
+      </form>
       <div className="search-body">
         { error ? (
           <>Oh dear it's broken</>
