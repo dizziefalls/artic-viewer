@@ -41,34 +41,37 @@ export default function SearchBrowser() {
       </form>
       <div className="filter-sidebar"></div>
       <div className="search-body">
-        { error ? (
-          <>Oh dear it's broken</>
-        ) : isLoading ? (
-          <>Loading...</>
-        ) : data ? (
-          <>
-            {console.log(data)}
-            { // mod. to a component
-              data.data.map((work: any) => {
-                return (
-                  <div key={work.id} >
-                    <h4>{work.title}</h4>
-                    <Link to={`/artwork/${work.id}`}>
-                      <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
-                    </Link>
-                  </div>
-                )
-              })
-            }
-            <div className="page-controller">
-              <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-              </ul>
-            </div>
-          </>
-        ) : <></>}
+        <div className="search-cards">
+          { error ? (
+            <>Oh dear it's broken</>
+          ) : isLoading ? (
+            <>Loading...</>
+          ) : data ? (
+            <>
+              {console.log(data)}
+              { // mod. to a component
+                data.data.map((work: any) => {
+                  return (
+                    <div key={work.id} >
+                      <h4>{work.title}</h4>
+                      <Link to={`/artwork/${work.id}`}>
+                        <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
+                      </Link>
+                    </div>
+                  )
+                })
+              }
+              
+            </>
+          ) : <></>}
+        </div>
+        <div className="page-controller">
+                <ul>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                </ul>
+              </div>
       </div>
     </div>
   )

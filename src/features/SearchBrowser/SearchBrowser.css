@@ -15,20 +15,38 @@
 
 .search-body {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
-.search-body > * {
+.search-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.search-cards > div {
+  flex: 0 1 calc(24% -1em);
   max-width: 400px;
   max-height: 400px;
-  padding: 1rem;
-  margin: 1rem;
 }
 
-.search-body > div > a > img {
+.search-cards > div > a > img {
   max-width: 300px;
   max-height: 300px;
+}
+
+.page-controller {
+  align-self: flex-end;
+}
+
+.page-controller > ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin-right: 1rem;
+}
+
+.page-controller > ul > * {
+  border: solid black 1px;
+  padding: .1rem .33rem;
 }

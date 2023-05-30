@@ -1,8 +1,8 @@
-import Trail from './Trail'
 import { useState } from 'react'
+import Navbar from './Navbar'
+import Trail from './Trail'
 
 import './Header.css'
-import Navbar from './Navbar'
 
 export default function Header() {
   const [open, SetOpen] = useState(true)
