@@ -5,6 +5,8 @@ import React, { FormEventHandler, useRef } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { setPageSizeLimit } from "../../common/pageConfigSlice"
 
+import "./SearchBrowser.css"
+
 // Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
   const pageConfig = useAppSelector((state) => state.pageConfig)
@@ -24,7 +26,7 @@ export default function SearchBrowser() {
   }
 
   return (
-    <>
+    <div className="search-container">
       <h3>This is where the searches go! </h3>
       <form onSubmit={(e) => handleQuery(e)}>
         <input type="text" placeholder="Search for works at artic..." />
@@ -68,6 +70,6 @@ export default function SearchBrowser() {
           </>
         ) : <></>}
       </div>
-    </>
+    </div>
   )
 }
