@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
 export interface FavoritesState {
-  favorites: string[]
+  favorites: any[]
 }
 
 const initialState: FavoritesState = {
@@ -14,7 +14,11 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFav: (state, action: PayloadAction<string>) => {
-      state.favorites.push(action.payload)
+      const favIds = state.favorites.map(fav => fav.id!)
+      if (!favIds.includes(action.payload.id!)) {
+        console.log("artwork already registered")
+        state.favorites.push(action.payload)
+      }
     },
     removeFav: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.filter(fav => fav !== action.payload)

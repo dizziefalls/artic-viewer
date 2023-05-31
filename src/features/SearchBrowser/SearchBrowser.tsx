@@ -3,9 +3,10 @@ import { Link } from "react-router-dom"
 import imageURLBuilder from "../../helpers/imageURLBuilder"
 import React, { FormEventHandler, useRef } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { setPageSizeLimit } from "../../common/pageConfigSlice"
+import { resetPageNumber, setPageSizeLimit } from "../../common/pageConfigSlice"
 
 import "./SearchBrowser.css"
+import ArtworkCard from "../ArtworkCard/ArtworkCard"
 
 // Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
@@ -23,6 +24,7 @@ export default function SearchBrowser() {
   function handleQuery(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     dispatch(setPageSizeLimit(selectSizeRef.current?.value!))
+    dispatch(resetPageNumber())
   }
 
   return (
@@ -52,11 +54,8 @@ export default function SearchBrowser() {
               { // mod. to a component
                 data.data.map((work: any) => {
                   return (
-                    <div key={work.id} >
-                      <h4>{work.title}</h4>
-                      <Link to={`/artwork/${work.id}`}>
-                        <img src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
-                      </Link>
+                    <div key={work.id} className="artwork-card">
+                        <ArtworkCard data={data} work={work}/>
                     </div>
                   )
                 })

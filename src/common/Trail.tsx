@@ -25,7 +25,7 @@ const Trail = ({ open, children }: TrailProps) => {
           <a.div style={{ width }}>{items[index]}</a.div>
         </a.div>
       ))}
-      </div>
+    </div>
   )
 }
 

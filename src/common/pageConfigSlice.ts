@@ -18,11 +18,14 @@ export const pageConfigSlice = createSlice({
     setPageNumber: (state, action: PayloadAction<string>) => {
       state.pageNumber = action.payload
     },
+    resetPageNumber: (state) => {
+      state.pageNumber = initialState.pageNumber
+    },
     setPageSizeLimit: (state, action: PayloadAction<string>) => {
       state.pageSizeLimit = action.payload
     }
   }
 })
 
-export const { setPageSizeLimit } = pageConfigSlice.actions
+export const { setPageNumber, resetPageNumber, setPageSizeLimit } = pageConfigSlice.actions
 export default pageConfigSlice.reducer
