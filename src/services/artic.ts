@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type IResponse from '../types/response'
 
 // would be nice to build the options separately and always append them...
 // using return types are breaking it currently
@@ -8,13 +7,13 @@ export const articApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.artic.edu/api/v1/'}),
   endpoints: (builder) => ({
     getAllWorks: builder.query({
-      query: ({options}) => `artworks?page=${options.pageNumber}&limit=${options.pageSizeLimit}`,
+      query: (queryOptions) => `artworks?${queryOptions}`,
     }),
     getWorkById: builder.query({
       query: (id) => `artworks/${id}`
     }),
     getWorksByQuery: builder.query({
-      query: (searchString) => `artworks/search?q=${searchString}`
+      query: (queryOptions) => `artworks/search?q=${queryOptions}`
     })
   })
 })

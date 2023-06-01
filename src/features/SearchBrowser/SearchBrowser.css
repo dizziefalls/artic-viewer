@@ -112,4 +112,10 @@
 .page-controller > ul > * {
   border: solid black 1px;
   padding: .1rem .33rem;
+  text-decoration: none;
+  color: black;
 }
+
+/* .page-controller a.active {
+  background-color: aqua;
+} */

@@ -1,28 +1,36 @@
 import { useGetAllWorksQuery } from "../../services/artic"
 import React, { useEffect, useRef } from "react"
+import { NavLink } from "react-router-dom"
+import { resetPageNumber, setImageBaseUrl, setPageNumber, setPageSizeLimit, setQueryString } from "../../common/pageConfigSlice"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { resetPageNumber, setImageBaseUrl, setPageSizeLimit } from "../../common/pageConfigSlice"
+import queryOptionsBuilder from "../../helpers/queryOptionsBuilder"
+import ArtworkCard from "../ArtworkCard/ArtworkCard"
 
 import "./SearchBrowser.css"
-import ArtworkCard from "../ArtworkCard/ArtworkCard"
-import imageURLBuilder from "../../helpers/imageURLBuilder"
 
 // Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
   const pageConfig = useAppSelector((state) => state.pageConfig)
   const dispatch = useAppDispatch()
   
-  const { data, error, isLoading } = useGetAllWorksQuery({ 
-    options: {
+  const { data, error, isLoading } = useGetAllWorksQuery(
+    queryOptionsBuilder({
+      q: pageConfig.q,
       pageNumber: pageConfig.pageNumber,
       pageSizeLimit: pageConfig.pageSizeLimit
-    }})
+    }))
 
   const selectSizeRef = useRef<HTMLSelectElement>(null)
+  // const queryRef = useRef<H
 
   function handleQuery(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    //dispatch(setQueryString())
     dispatch(setPageSizeLimit(selectSizeRef.current?.value!))
+  }
+
+  function handlePageChange(e: React.SyntheticEvent<HTMLAnchorElement, Event>) {
+    dispatch(setPageNumber(e.target.innerText))
   }
 
   useEffect(() => {
@@ -67,12 +75,43 @@ export default function SearchBrowser() {
           ) : <></>}
         </div>
         <div className="page-controller">
-                <ul>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                </ul>
-              </div>
+          <ul>
+          { data ?
+              pageConfig.pageNumber === '1' ?
+                (
+                  <>
+                    <NavLink to='#'>1</NavLink>
+                    <NavLink to='#' onClick={(e) => handlePageChange(e)}>2</NavLink>
+                    <NavLink to='#' onClick={(e) => handlePageChange(e)}>3</NavLink>
+                    <span>...</span>
+                    <NavLink to='#' onClick={(e) => handlePageChange(e)}>{data.pagination.total_pages}</NavLink>
+                  </>
+                )
+              : (
+                <>
+                  {+pageConfig.pageNumber > 2 ?
+                    <>
+                      <NavLink to='#' onClick={(e) => handlePageChange(e)}>1</NavLink>
+                      <span>...</span>
+                    </>
+                  : <></>}
+
+                  <NavLink to='#' onClick={(e) => handlePageChange(e)}>{+pageConfig.pageNumber - 1}</NavLink>
+                  <NavLink to='#' onClick={(e) => handlePageChange(e)}>{pageConfig.pageNumber}</NavLink>
+                  {+pageConfig.pageNumber !== data.pagination.total_pages ?
+                    <>
+                      <NavLink to='#' onClick={(e) => handlePageChange(e)}>{+pageConfig.pageNumber + 1}</NavLink>
+                      <NavLink to='#' onClick={(e) => handlePageChange(e)}>{+pageConfig.pageNumber + 2}</NavLink>
+                      <span>...</span>
+                      <NavLink to='#' onClick={(e) => handlePageChange(e)}>{data.pagination.total_pages}</NavLink>
+                    </>
+                  :<></>}
+                </>
+              )
+            : <></>
+          }
+          </ul>
+        </div>
       </div>
     </div>
   )

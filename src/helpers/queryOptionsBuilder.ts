@@ -2,7 +2,7 @@ import IQueryOptions from "../types/queryOptions"
 
 // Builds string for use in queries so we don't have to muddy the service up
 export default function queryOptionsBuilder(options: IQueryOptions): string {
-  const {q, pageNumber, pageSize } = options
+  const {q, pageNumber, pageSizeLimit } = options
   let queryOptions: string = ''
 
   if (q) {
@@ -13,8 +13,8 @@ export default function queryOptionsBuilder(options: IQueryOptions): string {
     queryOptions += `page=${pageNumber}&`
   }
 
-  if (pageSize) {
-    queryOptions += `limit=${pageSize}`
+  if (pageSizeLimit) {
+    queryOptions += `limit=${pageSizeLimit}`
   }
 
   //Remove any trailing &s
