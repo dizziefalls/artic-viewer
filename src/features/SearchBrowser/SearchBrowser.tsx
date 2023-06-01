@@ -1,12 +1,11 @@
 import { useGetAllWorksQuery } from "../../services/artic"
-import { Link } from "react-router-dom"
-import imageURLBuilder from "../../helpers/imageURLBuilder"
-import React, { FormEventHandler, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { resetPageNumber, setPageSizeLimit } from "../../common/pageConfigSlice"
+import { resetPageNumber, setImageBaseUrl, setPageSizeLimit } from "../../common/pageConfigSlice"
 
 import "./SearchBrowser.css"
 import ArtworkCard from "../ArtworkCard/ArtworkCard"
+import imageURLBuilder from "../../helpers/imageURLBuilder"
 
 // Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
@@ -15,7 +14,7 @@ export default function SearchBrowser() {
   
   const { data, error, isLoading } = useGetAllWorksQuery({ 
     options: {
-      pageSize: pageConfig.pageNumber,
+      pageNumber: pageConfig.pageNumber,
       pageSizeLimit: pageConfig.pageSizeLimit
     }})
 
@@ -24,8 +23,11 @@ export default function SearchBrowser() {
   function handleQuery(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     dispatch(setPageSizeLimit(selectSizeRef.current?.value!))
-    dispatch(resetPageNumber())
   }
+
+  useEffect(() => {
+    if (data) dispatch(setImageBaseUrl(data.config.iiif_url))
+  }, [data])
 
   return (
     <div className="search-container">
@@ -51,11 +53,11 @@ export default function SearchBrowser() {
           ) : data ? (
             <>
               {console.log(data)}
-              { // mod. to a component
+              {
                 data.data.map((work: any) => {
                   return (
                     <div key={work.id} className="artwork-card">
-                        <ArtworkCard data={data} work={work}/>
+                        <ArtworkCard work={work} imageBaseUrl={pageConfig.imageBaseUrl}/>
                     </div>
                   )
                 })

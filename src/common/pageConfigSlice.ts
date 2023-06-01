@@ -4,11 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface PageConfigState {
   pageNumber: string,
   pageSizeLimit: string,
+  imageBaseUrl: string
 }
 
 const initialState: PageConfigState = {
   pageNumber: "1",
-  pageSizeLimit: "25"
+  pageSizeLimit: "25",
+  imageBaseUrl: ""
 }
 
 export const pageConfigSlice = createSlice({
@@ -23,9 +25,12 @@ export const pageConfigSlice = createSlice({
     },
     setPageSizeLimit: (state, action: PayloadAction<string>) => {
       state.pageSizeLimit = action.payload
+    },
+    setImageBaseUrl: (state, action: PayloadAction<string>) => {
+      state.imageBaseUrl = action.payload
     }
   }
 })
 
-export const { setPageNumber, resetPageNumber, setPageSizeLimit } = pageConfigSlice.actions
+export const { setPageNumber, resetPageNumber, setPageSizeLimit, setImageBaseUrl } = pageConfigSlice.actions
 export default pageConfigSlice.reducer

@@ -2,33 +2,25 @@ import imageURLBuilder from "../../helpers/imageURLBuilder";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addFav, removeFav } from "../Favorites/favoritesSlice";
 import { Link } from "react-router-dom";
+import loadDefaultImage from "../../helpers/loadDefaultImage";
 
 export interface ArtworkCardProps {
   work: any,
-  data: any
+  imageBaseUrl: string
 }
 
-export default function ArtworkCard({ work, data }: ArtworkCardProps) {
+export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
   const favSelector = useAppSelector(state => state.favorites)
   const dispatch = useAppDispatch()
-
-  function handleFav() {
-    if (favSelector.favorites.includes(work.name)) {
-      dispatch(removeFav(work))
-      console.log(favSelector.favorites)
-    }
-    else if (!favSelector.favorites.includes(work.name)) {
-      
-      dispatch(addFav(work))
-      console.log(favSelector.favorites)
-    }
-  }
 
 
   return (
     <>
       <Link to={`/artwork/${work.id}`}>
-        <img className="artwork-card-img" src={imageURLBuilder(data.config.iiif_url, work.image_id)}/>
+        <img 
+          className="artwork-card-img" 
+          src={imageURLBuilder(imageBaseUrl, work.image_id)}
+          onError={(e) => loadDefaultImage(e)}/>
       </Link>
       <div className="artwork-card-footer-content">
         <div className="artwork-card-footer-content-body">
@@ -42,13 +34,13 @@ export default function ArtworkCard({ work, data }: ArtworkCardProps) {
             <button 
             className="artwork-card-fav-btn"
             style={{color: "red"}}
-            onClick={() => handleFav()}>
+            onClick={() => dispatch(removeFav(work))}>
               &#9829;
             </button>
             : <button 
             className="artwork-card-fav-btn"
             color="black"
-            onClick={() => handleFav()}>
+            onClick={() => dispatch(addFav(work))}>
               &#9829;
             </button>}
         </div>

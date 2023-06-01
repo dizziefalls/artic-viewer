@@ -55,9 +55,25 @@
   height: 18rem;
 }
 
+.artwork-card-img-not-found {
+  padding-top: 2rem;
+}
+
 .artwork-card-footer-content {
   padding: 2rem;
   display: flex;
+  justify-content: space-between;
+}
+
+.artwork-card-footer-content::before {
+  font-size: 2rem;
+  margin: 1rem;
+  content: 'X';
+  visibility: hidden;
+}
+
+.artwork-card-footer-content-body {
+  margin: auto;
 }
 
 .artwork-card-footer-content-title {
@@ -81,17 +97,6 @@
   padding: 1rem;
   font-size: 2rem;
 }
-
-/* .artwork-card {
-  flex: 0 1 calc(24% -1em);
-  max-width: 400px;
-  max-height: 400px;
-}
-
-.artwork-card img {
-  max-width: 300px;
-  max-height: 300px;
-} */
 
 .page-controller {
   align-self: flex-end;
