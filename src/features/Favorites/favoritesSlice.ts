@@ -14,14 +14,14 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFav: (state, action: PayloadAction<string>) => {
-      const favIds = state.favorites.map(fav => fav.id!)
+      const favIds = state.favorites.map(fav => fav.id)
       if (!favIds.includes(action.payload.id!)) {
         console.log("artwork already registered")
         state.favorites.push(action.payload)
       }
     },
     removeFav: (state, action: PayloadAction<string>) => {
-      state.favorites = state.favorites.filter(fav => fav !== action.payload)
+      state.favorites = state.favorites.filter(fav => fav.id !== action.payload.id)
     }
   }
 })

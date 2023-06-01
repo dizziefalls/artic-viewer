@@ -36,6 +36,7 @@
   box-shadow: 0 3rem 6rem rgba(0, 0 ,0, 0.1);
   cursor: pointer;
   transition: 0.2s;
+  flex: 0 1 calc(24% -1em);
 }
 
 .artwork-card:hover {
@@ -51,6 +52,7 @@
 .artwork-card-img {
   width: 100%;
   object-fit: cover;
+  height: 18rem;
 }
 
 .artwork-card-footer-content {
