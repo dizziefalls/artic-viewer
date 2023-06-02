@@ -1,9 +1,14 @@
+import { useEffect } from "react"
 import { useAppSelector } from "../../app/hooks"
 import ArtworkCard from "../ArtworkCard/ArtworkCard"
 
 export default function Favorites() {
   const favorites = useAppSelector(state => state.favorites.favorites)
   const pageConfig = useAppSelector(state => state.pageConfig)
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [favorites])
 
   return (
     <>

@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
+//stored as whole artworks rn. could probably change this to just use ids.
 export interface FavoritesState {
   favorites: any[]
 }
 
 const initialState: FavoritesState = {
-  favorites: []
+  favorites: localStorage.getItem("favorites") ? 
+    JSON.parse(localStorage.getItem("favorites")!) :
+    []
 }
 
 export const favoritesSlice = createSlice({

@@ -11,6 +11,7 @@ import "./SearchBrowser.css"
 // Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
   const pageConfig = useAppSelector((state) => state.pageConfig)
+  const favorites = useAppSelector((state) => state.favorites.favorites)
   const dispatch = useAppDispatch()
   const selectSizeRef = useRef<HTMLSelectElement>(null)
   const queryRef = useRef<HTMLInputElement>(null)
@@ -47,6 +48,10 @@ export default function SearchBrowser() {
   useEffect(() => {
     dispatch(resetQueryString())
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [favorites])
 
   return (
     <div className="search-container">
