@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import loadDefaultImage from "../../helpers/loadDefaultImage";
 import clipText from "../../helpers/clipText";
 import { useGetWorkDetailsByIdQuery } from "../../services/artic";
+import { useEffect, useState } from "react";
 
 export interface ArtworkCardProps {
   work: any,
@@ -15,6 +16,13 @@ export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
   const favSelector = useAppSelector(state => state.favorites)
   const dispatch = useAppDispatch()
   const { data } = useGetWorkDetailsByIdQuery(work.id)
+
+  const [favIds, setFavIds] = useState(Array<string>)
+
+  useEffect(() => {
+    const tempIds = favSelector.favorites.map(fav => fav.id)
+    setFavIds(tempIds)
+  }, [favSelector])
 
   return (
     <>
@@ -46,7 +54,7 @@ export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
           </p>
         </div>
         <div>
-          {favSelector.favorites.includes(work) ?
+          {favIds.includes(work.id) ?
             <button 
             className="artwork-card-fav-btn"
             style={{color: "red"}}
