@@ -8,7 +8,6 @@ import ArtworkCard from "../ArtworkCard/ArtworkCard"
 
 import "./SearchBrowser.css"
 
-// Figure out how to add searching smoothly. Might need a new route
 export default function SearchBrowser() {
   const pageConfig = useAppSelector((state) => state.pageConfig)
   const favorites = useAppSelector((state) => state.favorites.favorites)
@@ -34,21 +33,32 @@ export default function SearchBrowser() {
     dispatch(setPageSizeLimit(selectSizeRef.current?.value!))
   }
 
+  // Can't seem to find the right type...
   function handlePageChange(e: React.SyntheticEvent<HTMLAnchorElement, Event>) {
     dispatch(setPageNumber(e.target.innerText))
   }
 
+  // Updates image url on data change. Probably overkill..
   useEffect(() => {
-    dispatch(resetPageNumber())
     if (data) {
       dispatch(setImageBaseUrl(data.config.iiif_url))
     }
   }, [data])
 
+  // Reset the pageConfig when navigating away
   useEffect(() => {
     dispatch(resetQueryString())
+    dispatch(resetPageNumber())
   }, [])
 
+  // Scroll to the top after changing page. Timeout helps it line up with the api call
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 200)
+  }, [pageConfig.pageNumber])
+
+  // Favorites storage
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites))
   }, [favorites])
