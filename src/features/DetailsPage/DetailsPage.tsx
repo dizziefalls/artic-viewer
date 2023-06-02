@@ -7,7 +7,11 @@ import './DetailsPage.css'
 // account for null work and pull from query
 const DetailsPage = () => {
   const { id } = useParams()
-  const { data, error, isLoading } = useGetWorkByIdQuery(id!)
+  const { 
+    data, 
+    //error, 
+    //isLoading 
+  } = useGetWorkByIdQuery(id!)
   return (
     <>
     {

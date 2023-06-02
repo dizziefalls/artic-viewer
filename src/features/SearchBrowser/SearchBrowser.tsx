@@ -34,7 +34,7 @@ export default function SearchBrowser() {
   }
 
   // Can't seem to find the right type...
-  function handlePageChange(e: React.SyntheticEvent<HTMLAnchorElement, Event>) {
+  function handlePageChange(e: any) {
     dispatch(setPageNumber(e.target.innerText))
   }
 
