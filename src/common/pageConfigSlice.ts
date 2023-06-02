@@ -12,7 +12,7 @@ const initialState: PageConfigState = {
   q: null,
   pageNumber: "1",
   pageSizeLimit: "25",
-  imageBaseUrl: ""
+  imageBaseUrl: "https://www.artic.edu/iiif/2"
 }
 
 export const pageConfigSlice = createSlice({

@@ -83,6 +83,6 @@ body {
 
 *,
 *:after,
-*before {
+*:before {
   box-sizing: border-box;
 }

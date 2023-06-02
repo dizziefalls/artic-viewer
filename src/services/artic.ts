@@ -7,15 +7,18 @@ export const articApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.artic.edu/api/v1/'}),
   endpoints: (builder) => ({
     getAllWorks: builder.query({
-      query: (queryOptions) => `artworks?${queryOptions}`,
+      query: (queryOptions) => `artworks${queryOptions}`,
     }),
     getWorkById: builder.query({
       query: (id) => `artworks/${id}`
     }),
+    getWorkImageId: builder.query({
+      query: (id) => `artworks/${id}?fields=image_id`
+    }),
     getWorksByQuery: builder.query({
-      query: (queryOptions) => `artworks/search?q=${queryOptions}`
+      query: (queryOptions) => `artworks${queryOptions}`
     })
   })
 })
 
-export const { useGetAllWorksQuery, useGetWorkByIdQuery, useGetWorksByQueryQuery } = articApi
+export const { useGetAllWorksQuery, useGetWorkByIdQuery, useGetWorkImageIdQuery, useGetWorksByQueryQuery } = articApi

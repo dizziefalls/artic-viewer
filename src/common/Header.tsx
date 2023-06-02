@@ -9,12 +9,12 @@ export default function Header() {
 
   return (
     <>
-    <div className="container" onClick={() => SetOpen(open => !open)}>
-      <Trail open={open}>
-        <span>artic</span>
-        <span>viewer</span>
-      </Trail>
-    </div>
+      <div className="container" onClick={() => SetOpen(open => !open)}>
+        <Trail open={open}>
+          <span>artic</span>
+          <span>viewer</span>
+        </Trail>
+      </div>
       <Navbar />
     </>
   )

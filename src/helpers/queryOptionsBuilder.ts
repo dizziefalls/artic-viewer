@@ -6,7 +6,10 @@ export default function queryOptionsBuilder(options: IQueryOptions): string {
   let queryOptions: string = ''
 
   if (q) {
-    queryOptions += `q=${q}&`
+    queryOptions += `/search?q=${q}&`
+  }
+  else {
+    queryOptions += `?`
   }
 
   if (pageNumber) {

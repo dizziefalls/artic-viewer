@@ -11,7 +11,7 @@ export default function Favorites() {
       <div className="favorites-container">{
         favorites ?
         favorites.map((fav) => 
-          <div className="artwork-card">
+          <div className="artwork-card" key={fav.id}>
             <ArtworkCard work={fav} imageBaseUrl={pageConfig.imageBaseUrl}/>
           </div>
         ):

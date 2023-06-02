@@ -1,0 +1,16 @@
+.details-page {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  text-align: left;
+}
+
+.details-page img {
+  width: 100%;
+}
+
+.details-text dd {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}

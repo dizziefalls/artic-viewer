@@ -2,7 +2,7 @@
   font-size: 20px;
 }
 
-.navbar > ul {
+.navbar ul {
   list-style-type: none;
   display: flex;
   flex-direction: row;
@@ -11,7 +11,16 @@
   padding: 1rem 2rem;
 }
 
-.navbar > ul > * {
+.navbar ul a {
   text-decoration: none;
-  color: black
+  color: black;
+  padding: 0 .25rem .25rem .25rem;
+}
+
+.navbar ul a.active {
+  border-bottom: 1px rgba(0, 0, 0, 0.7) solid;
+}
+
+.navbar ul a:hover {
+  opacity: .8;
 }
