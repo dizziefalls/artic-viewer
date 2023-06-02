@@ -14,3 +14,12 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
 }
+
+.details-text dt {
+  font-size: 1.1rem;
+  margin-bottom: .4rem;
+}
+
+.details-text * {
+  line-height: 1.25;
+}
