@@ -1,21 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import Trail from './Trail'
 
 import './Header.css'
 
 export default function Header() {
-  const [open, SetOpen] = useState(true)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    setOpen(true)
+  })
 
   return (
-    <>
-      <div className="container" onClick={() => SetOpen(open => !open)}>
+    <header>
+      <div className="container">
         <Trail open={open}>
-          <span>artic</span>
-          <span>viewer</span>
+            <span>artic</span>
+            <span>viewer</span>
         </Trail>
       </div>
       <Navbar />
-    </>
+    </header>
   )
 }

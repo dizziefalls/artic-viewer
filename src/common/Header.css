@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  cursor: pointer;
 }
 
 .trailsText {
@@ -21,6 +20,7 @@
   letter-spacing: -0.05em;
   will-change: transform, opacity;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .trailsText > div {

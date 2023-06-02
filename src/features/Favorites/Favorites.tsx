@@ -8,7 +8,7 @@ export default function Favorites() {
   return (
     <>
       <h3>I'm where the favorites go!</h3>
-      <div className="favorites-container">{
+      <div className="search-cards">{
         favorites ?
         favorites.map((fav) => 
           <div className="artwork-card" key={fav.id}>
