@@ -4,7 +4,7 @@ import { addFav, removeFav } from "../Favorites/favoritesSlice";
 import { Link } from "react-router-dom";
 import loadDefaultImage from "../../helpers/loadDefaultImage";
 import clipText from "../../helpers/clipText";
-import { useGetWorkImageIdQuery } from "../../services/artic";
+import { useGetWorkDetailsByIdQuery } from "../../services/artic";
 
 export interface ArtworkCardProps {
   work: any,
@@ -14,7 +14,7 @@ export interface ArtworkCardProps {
 export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
   const favSelector = useAppSelector(state => state.favorites)
   const dispatch = useAppDispatch()
-  const { data } = useGetWorkImageIdQuery(work.id)
+  const { data } = useGetWorkDetailsByIdQuery(work.id)
 
   return (
     <>
@@ -35,8 +35,14 @@ export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
       <div className="artwork-card-footer-content">
         <div className="artwork-card-footer-content-body">
           <h4 className="artwork-card-footer-content-title">{clipText(work.title)}</h4>
-          <p className="artwork-card-footer-content-text">{work.artist_title}
-            <span> - {work.date_display}</span>
+          <p className="artwork-card-footer-content-text">{
+          work.artist_title ?
+          work.artist_title :
+          data?.data.artist_title}
+            <span> - {
+          work.date_display ?
+          work.date_display :
+          data?.data.date_display}</span>
           </p>
         </div>
         <div>
@@ -55,5 +61,5 @@ export default function ArtworkCard({ work, imageBaseUrl }: ArtworkCardProps) {
         </div>
       </div>
     </>
-)
+  )
 }

@@ -12,8 +12,8 @@ export const articApi = createApi({
     getWorkById: builder.query({
       query: (id) => `artworks/${id}`
     }),
-    getWorkImageId: builder.query({
-      query: (id) => `artworks/${id}?fields=image_id`
+    getWorkDetailsById: builder.query({
+      query: (id) => `artworks/${id}?fields=image_id,artist_title,date_display`
     }),
     getWorksByQuery: builder.query({
       query: (queryOptions) => `artworks${queryOptions}`
@@ -21,4 +21,4 @@ export const articApi = createApi({
   })
 })
 
-export const { useGetAllWorksQuery, useGetWorkByIdQuery, useGetWorkImageIdQuery, useGetWorksByQueryQuery } = articApi
+export const { useGetAllWorksQuery, useGetWorkByIdQuery, useGetWorkDetailsByIdQuery, useGetWorksByQueryQuery } = articApi
